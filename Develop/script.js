@@ -20,27 +20,35 @@ $(document).ready(function () {
   // attribute of each time-block be used to do this?
   //
   // TODO: Add code to display the current date in the header of the page
+
+  // Hides "class saved" confirmation message automatically after loading page
   $('#saved').addClass('hide')
 
+  // Function to show "class saved" message
   function showMessage() {
     $('#saved').removeClass('hide')
   }
 
+  // Function to hide "class saved" message
   function hideMessage() {
     $('#saved').addClass('hide')
   }
 
+  // Event Listener where clicking the save button will run saveClass function
   $('.saveBtn').on('click', saveClass)
 
+  // function that uses form input as task variable and sets time variable and then commits to local memory. 
   function saveClass() {
     var task = $(this).siblings('.task').val();
     var time = $(this).parent().attr('id');
 
+//Also displays "Saved to planner" message which disappears after 3 seconds
     localStorage.setItem(time, task)
     showMessage()
-    setTimeout(hideMessage, 2000)
+    setTimeout(hideMessage, 3000)
   }
 
+  // sets hour variable so function can use as a reference to determine whether task is in past present or future
 var hour = dayjs().hour();
 
 function timeUpdater() {
