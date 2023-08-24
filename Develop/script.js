@@ -1,25 +1,4 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
 $(document).ready(function () {
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  //
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
-  // TODO: Add code to display the current date in the header of the page
 
   // Hides "class saved" confirmation message automatically after loading page
   $('#saved').addClass('hide')
@@ -42,19 +21,25 @@ $(document).ready(function () {
     var task = $(this).siblings('.task').val();
     var time = $(this).parent().attr('id');
 
-//Also displays "Saved to planner" message which disappears after 3 seconds
+//Also displays "Saved to planner" message which disappears after 2.5 seconds
     localStorage.setItem(time, task)
     showMessage()
-    setTimeout(hideMessage, 3000)
+    setTimeout(hideMessage, 2500)
   }
 
   // sets hour variable so function can use as a reference to determine whether task is in past present or future
 var hour = dayjs().hour();
 
-function timeUpdater() {
+// function that sets class of time block to "past", "present", or "future" based on real time
+function blockUpdater() {
+
+  // runs function for each element with class "timeblock"
   $('.timeblock').each(function() {
+
+    // changes HTML element ID from string to integer so it can be compared to real hour
     var blockHour = parseInt($(this).attr('id'));
 
+    // Sets class by comparing HTML ID to real hour
     if (blockHour === hour) {
       $(this).removeClass('past')
       $(this).removeClass('future')
@@ -70,10 +55,13 @@ function timeUpdater() {
     }
   })
 }
-timeUpdater()
-setInterval(timeUpdater, 50000)
 
-  $('#currentDay').text(dayjs().format('dddd, MMMM D, YYYY, h'));
+// runs blockUpdater function and re-runs every minute
+blockUpdater()
+setInterval(blockUpdater, 60000)
+
+// Pulls time and sets it to 'currentday' element at the top of the page
+  $('#currentDay').text(dayjs().format('dddd, MMMM D, YYYY, h:mm'));
 
   $('#9 .task').val(localStorage.getItem('9'));
   $('#10 .task').val(localStorage.getItem('10'));
