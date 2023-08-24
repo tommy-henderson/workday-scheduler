@@ -1,8 +1,10 @@
+/* sets font style and size in body section of app */
 body {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
 }
 
+/* styles time block elements */
 textarea {
   background: transparent;
   border: none;
@@ -30,6 +32,7 @@ textarea {
   border-top: 1px dashed #000000;
 }
 
+/* classes to assign depending on time */
 .past {
   background-color: #d3d3d3;
   color: white;
@@ -45,6 +48,7 @@ textarea {
   color: white;
 }
 
+/* styles save button and gives it feedback for hover/click */
 .saveBtn {
   border-left: 1px solid black;
   border-top-right-radius: 15px;
@@ -58,10 +62,7 @@ textarea {
   transition: all 0.3s ease-in-out;
 }
 
-.show {
-  display: block;
-}
-
+/* class to hide confirmation message */
 .hide {
   display: none;
 }
