@@ -22,38 +22,59 @@ $(document).ready(function () {
   // TODO: Add code to display the current date in the header of the page
   $('#saved').addClass('hide')
 
-function showMessage() {
-  $('#saved').removeClass('hide')
-}
+  function showMessage() {
+    $('#saved').removeClass('hide')
+  }
 
-function hideMessage () {
-  $('#saved').addClass('hide')
-}
-  $('#saved').addClass('hide')
+  function hideMessage() {
+    $('#saved').addClass('hide')
+  }
 
   $('.saveBtn').on('click', saveClass)
- 
-  function saveClass () {
+
+  function saveClass() {
     var task = $(this).siblings('.task').val();
     var time = $(this).parent().attr('id');
 
     localStorage.setItem(time, task)
-    showMessage ()
-    setTimeout(hideMessage, 1000)
+    showMessage()
+    setTimeout(hideMessage, 2000)
   }
 
-$('#currentDay').text(dayjs().format('dddd, MMMM D, YYYY, h'));
+var hour = dayjs().hour();
 
+function timeUpdater() {
+  $('.timeblock').each(function() {
+    var blockHour = parseInt($(this).attr('id'));
+
+    if (blockHour === hour) {
+      $(this).removeClass('past')
+      $(this).removeClass('future')
+      $(this).addClass('present')
+    } else if (blockHour > hour) {
+      $(this).removeClass('past')
+      $(this).removeClass('present')
+      $(this).addClass('future')
+    } else if (blockHour < hour) {
+      $(this).removeClass('present')
+      $(this).removeClass('future')
+      $(this).addClass('past')
+    }
+  })
+}
+timeUpdater()
 setInterval(timeUpdater, 50000)
 
-$('#hour9 .task').val(localStorage.getItem('hour9'));
-$('#hour10 .task').val(localStorage.getItem('hour10'));
-$('#hour11 .task').val(localStorage.getItem('hour11'));
-$('#hour12 .task').val(localStorage.getItem('hour12'));
-$('#hour13 .task').val(localStorage.getItem('hour13'));
-$('#hour14 .task').val(localStorage.getItem('hour14'));
-$('#hour15 .task').val(localStorage.getItem('hour15'));
-$('#hour16 .task').val(localStorage.getItem('hour16'));
-$('#hour17 .task').val(localStorage.getItem('hour17'));
+  $('#currentDay').text(dayjs().format('dddd, MMMM D, YYYY, h'));
+
+  $('#9 .task').val(localStorage.getItem('9'));
+  $('#10 .task').val(localStorage.getItem('10'));
+  $('#11 .task').val(localStorage.getItem('11'));
+  $('#12 .task').val(localStorage.getItem('12'));
+  $('#13 .task').val(localStorage.getItem('13'));
+  $('#14 .task').val(localStorage.getItem('14'));
+  $('#15 .task').val(localStorage.getItem('15'));
+  $('#16 .task').val(localStorage.getItem('16'));
+  $('#17 .task').val(localStorage.getItem('17'));
 
 })
