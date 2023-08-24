@@ -13,6 +13,7 @@ N/A
 
 The app shows 9 1-hour time blocks from 9AM to 5PM. The app displays the current date/time at the top of the page, and changes the color of each time block to quickly allow user to see which block they are currently in and which blocks have been completed/are still upcoming. The user can type tasks into each block and click the save button. The tasks will be saved and will stay in local memory even if the user closes the page. 
 
+![Planner in Use](<Assets/Screenshot 2023-08-24 at 2.26.17 PM.png>)
 
 
 ## Credits
